@@ -7,14 +7,17 @@ Colby Adams to their phone.
 ## The URL to write to your NFC tag
 
 ```
-https://clobbyy.github.io/digital-business-card/
+https://colbyadams.io/
 ```
+
+*(Custom domain set via the `CNAME` file. The default GitHub Pages URL
+`https://clobbyy.github.io/digital-business-card/` also works.)*
 
 > Want the absolute fewest taps (best on iPhones)? You can instead write the
 > direct vCard link, which pops the "Add Contact" sheet with no landing page:
 >
 > ```
-> https://clobbyy.github.io/digital-business-card/contact.vcf
+> https://colbyadams.io/contact.vcf
 > ```
 >
 > The landing-page URL above is recommended because it works reliably on every
