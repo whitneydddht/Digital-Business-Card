@@ -1,53 +1,111 @@
-# Digital Business Card — Colby Adams
+# Digital Business Card
 
-A tap-to-save digital business card for an **NFC tag**. Someone taps the tag,
-their phone opens the card page, and one tap on **"Save to Contacts"** adds
-Colby Adams to their phone.
+A tiny, free **tap-to-save digital business card**. Someone taps your NFC tag
+(or scans your QR), your card page opens, and **one tap adds you to their
+contacts**. Everything is driven by **one config file** — no coding — and there's
+a browser **setup wizard** to fill it out visually.
 
-## The URL to write to your NFC tag
+**This instance:** <https://colbyadams.com/>
 
+---
+
+## Make your own in 3 steps
+
+1. **Copy this repo** — use the green **Use this template** button (or fork it).
+2. **Add your info** — either:
+   - open **`setup.html`** in your browser, fill the form, and click
+     **Download `config.js`** → replace the repo's `config.js`, **or**
+   - edit **`config.js`** directly (it's plain and commented).
+3. **Turn on GitHub Pages** — repo **Settings → Pages → Deploy from a branch →
+   `main` / `(root)`**. Your card is live in ~1 minute at
+   `https://<your-username>.github.io/<repo>/`.
+
+Then write that URL to an NFC tag (any "NFC Tools" app) and/or print your QR.
+
+## Editing your card (`config.js`)
+
+`config.js` is the **only** file you touch. It looks like:
+
+```js
+window.CARD_CONFIG = {
+  url: "https://colbyadams.com/",
+  name: "Colby Adams",
+  title: "Technical Director",
+  org: "Stockbridge Theatre",
+  theme: { accent: "#14b8a6", accent2: "#5eead4", onAccent: "#03231f" },
+  phones: [ { label: "Cell", value: "(603) 548-5547", dial: "+16035485547", primary: true } ],
+  emails: [ { label: "Email", value: "you@example.com" } ],
+  links:  [ { label: "LinkedIn", value: "linkedin.com/in/you", url: "https://…", icon: "linkedin" } ]
+};
 ```
-https://colbyadams.io/
+
+- **Theme:** any two hex colors.
+- **Link icons:** `globe`, `linkedin`, `github`, `instagram`, `youtube`,
+  `facebook`, `x`, `tool`, `calendar`, `location`.
+- Change a value, commit — the card **and** the saved contact update automatically.
+  The same NFC tag and QR keep working; you never re-write them.
+
+## QR code
+
+A ready QR lives in `assets/card-qr.png` / `.svg` (also hosted at
+`…/assets/card-qr.png`). Scan it → card opens → **Save to Contacts**.
+
+Regenerate it if your URL changes:
+
+```bash
+pip install segno
+python3 tools/generate-qr.py https://colbyadams.com/
 ```
 
-*(Custom domain set via the `CNAME` file. The default GitHub Pages URL
-`https://clobbyy.github.io/digital-business-card/` also works.)*
+(Or paste your URL into any online QR generator.)
 
-> Want the absolute fewest taps (best on iPhones)? You can instead write the
-> direct vCard link, which pops the "Add Contact" sheet with no landing page:
->
-> ```
-> https://colbyadams.io/contact.vcf
-> ```
->
-> The landing-page URL above is recommended because it works reliably on every
-> phone and looks like a real business card.
+## Custom domain (this repo uses `colbyadams.com`)
+
+The `CNAME` file points GitHub Pages at `colbyadams.com`. To finish it, add
+these records at your domain registrar (where you bought the domain):
+
+| Type | Host | Value |
+|------|------|-------|
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| CNAME | `www` | `colbyadams5.github.io.` |
+
+(Optional IPv6 — add four `AAAA` records on `@`: `2606:50c0:8000::153`,
+`2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`.)
+
+Then **Settings → Pages** should show the domain verified — tick
+**Enforce HTTPS** once the certificate is issued (can take a few minutes to an
+hour). Using a plain `<user>.github.io` URL instead? Just delete the `CNAME`
+file and clear the custom domain in Settings.
+
+## Apple Wallet (optional)
+
+Want it in Apple Wallet? Any Wallet pass must be signed with an Apple Developer
+certificate, so the easiest no-cost route is a third-party pass builder
+(e.g. **pass2u**, **WalletPasses**, **PassKit**): create a "generic" pass, add a
+**QR code** with your card URL, and it hands you an installable pass.
+*Note:* NFC inside a Wallet pass talks to reader terminals, not phones — the
+physical NFC tag is what does phone-to-phone tapping.
 
 ## What's in here
 
 | File | Purpose |
 |------|---------|
-| `index.html` | The styled business-card landing page (big "Save to Contacts" button + tap-to-call / tap-to-email). |
-| `contact.vcf` | The vCard (contact file) that triggers the phone's "Add Contact" prompt. |
-| `.nojekyll` | Tells GitHub Pages to serve the files as-is. |
+| `config.js` | **Your data** — the only file you edit. |
+| `setup.html` | Visual wizard: fill a form, preview live, download your `config.js`. |
+| `index.html` | Thin shell that renders the card from your config. |
+| `card.js` | Renders the card + builds the vCard + SEO/JSON-LD. (No need to edit.) |
+| `styles.css` | Card styling (theme colors come from your config). |
+| `assets/card-qr.*` | Your QR code. |
+| `tools/generate-qr.py` | Regenerate the QR for a new URL. |
+| `CNAME` | Custom domain for GitHub Pages. |
 
-## Going live (one-time, ~2 minutes)
+## How the "Save to Contacts" works
 
-1. **Make the repo public** (GitHub Pages is free only on public repos):
-   **Settings → General → Danger Zone → Change repository visibility →
-   Public**. A business card is public info anyway. *(Skip this if you're on a
-   paid GitHub plan and want to keep the repo private — Pages works on private
-   repos with Pro/Team/Enterprise.)*
+Tapping the button builds a **vCard** from your config on the spot and hands it
+to the phone, which shows the native **Add Contact** sheet. Because it's
+generated from `config.js`, the contact always matches what's on the card.
 
-2. **Turn on Pages:** **Settings → Pages → Build and deployment →
-   Source: _Deploy from a branch_ → Branch: `main` (or
-   `claude/nfc-business-card-url-3y81ka`) → Folder: `/ (root)` → Save.**
-
-Wait ~1 minute, then your card is live at the URL above. Write that URL to your
-NFC tag and you're done.
-
-## Updating your info
-
-Edit `contact.vcf` (the saved contact details) and `index.html` (what people
-see on the page), then commit. The same NFC tag keeps working — you never need
-to re-write the tag.
+Hosted free on **GitHub Pages**.
