@@ -26,19 +26,22 @@ https://clobbyy.github.io/digital-business-card/
 |------|---------|
 | `index.html` | The styled business-card landing page (big "Save to Contacts" button + tap-to-call / tap-to-email). |
 | `contact.vcf` | The vCard (contact file) that triggers the phone's "Add Contact" prompt. |
-| `.github/workflows/deploy-pages.yml` | Publishes the site to GitHub Pages automatically on every push. Also turns Pages on for you the first time it runs. |
 | `.nojekyll` | Tells GitHub Pages to serve the files as-is. |
 
-## Going live
+## Going live (one-time, ~2 minutes)
 
-The included GitHub Actions workflow enables and deploys Pages automatically —
-no Settings clicks needed. After this is on your default branch, the site
-publishes on each push. Check **Actions** and **Settings → Pages** for the live
-URL (it may take a minute on the first run).
+1. **Make the repo public** (GitHub Pages is free only on public repos):
+   **Settings → General → Danger Zone → Change repository visibility →
+   Public**. A business card is public info anyway. *(Skip this if you're on a
+   paid GitHub plan and want to keep the repo private — Pages works on private
+   repos with Pro/Team/Enterprise.)*
 
-If you'd rather not use Actions, you can publish manually instead:
-**Settings → Pages → Build and deployment → Source: Deploy from a branch →
-Branch: `main` / `(root)` → Save.**
+2. **Turn on Pages:** **Settings → Pages → Build and deployment →
+   Source: _Deploy from a branch_ → Branch: `main` (or
+   `claude/nfc-business-card-url-3y81ka`) → Folder: `/ (root)` → Save.**
+
+Wait ~1 minute, then your card is live at the URL above. Write that URL to your
+NFC tag and you're done.
 
 ## Updating your info
 
