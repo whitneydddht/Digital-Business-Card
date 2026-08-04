@@ -7,5 +7,11 @@ TITLE:Technical Director
 TEL;TYPE=CELL,VOICE,PREF:+16035485547
 TEL;TYPE=WORK,VOICE:+16034375200,5124
 EMAIL;TYPE=WORK,INTERNET:coadams@pinkertonacademy.org
-REV:2026-08-04T00:00:00Z
+item1.URL;TYPE=WORK:https://stockbridgetheatre.com
+item1.X-ABLabel:Stockbridge Theatre
+item2.URL:https://stgset.com
+item2.X-ABLabel:STG Set
+item3.URL:https://www.linkedin.com/in/colby-adams
+item3.X-ABLabel:LinkedIn
+REV:2026-08-04T04:30:00Z
 END:VCARD
