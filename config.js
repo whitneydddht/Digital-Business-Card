@@ -1,5 +1,5 @@
 window.CARD_CONFIG = {
-  "url": "https://colbyadams.com/",
+  "url": "https://whitneydddht.github.io/Digital-Business-Card/",
   "name": "Whitney Deng",
   "initials": "WD",
   "title": "Global Sales Director",
