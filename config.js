@@ -1,7 +1,7 @@
 window.CARD_CONFIG = {
   "url": "https://colbyadams.com/",
   "name": "Whitney Deng",
-  "initials": "CA",
+  "initials": "WD",
   "title": "Global Sales Director",
   "org": "Yeapten (Hong Kong) Trading Limited",
   "footer": "YEAPTEN.COM",
